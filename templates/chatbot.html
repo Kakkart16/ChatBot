@@ -90,7 +90,7 @@
       
       <ul class="list-unstyled messages-list">
         
-        <li class="message received">
+        {% comment %} <li class="message received">
           <div class="message-text">
             <div class="message-sender">
               <b>AI Chatbot</b>
@@ -99,7 +99,33 @@
               Hi, {{user.username}}, I am your AI Chatbot, how can I help you?
             </div>
           </div>
-        </li>
+        </li> {% endcomment %}
+
+        {% for chat in chats %}
+          {% if chat.user == request.user%}
+            <li class="message sent">
+              <div class="message-text">
+                <div class="message-sender">
+                  <b>You</b>
+                </div>
+                <div class="message-content">
+                  {{chat.message}}
+                </div>
+              </div>
+            </li>
+
+            <li class="message received">
+              <div class="message-text">
+                <div class="message-sender">
+                  <b>AI Chatbot</b>
+                </div>
+                <div class="message-content">
+                  {{chat.message}}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
       </ul>
       
     </div>
