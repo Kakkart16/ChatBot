@@ -67,7 +67,25 @@
 {% block content %}
 <div class="chat-container">
   <div class="card flex-grow-1">
-    <div class="card-header bg-primary text-white">Chat</div>
+    <div class='row bg-primary'>
+      <div class="card-header bg-primary text-white" style="margin-left:20px"><b>Chat</b></div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class='row bg-primary'>
+      <div class='col-10'>
+        <div class="card-header bg-primary text-white"><b>Welcome, {{user.username}}</b> </div>
+      </div>
+      <div class='col'>
+        <div class="card-header bg-primary" style="margin-left:auto; margin-right:20px"><a style="color: white;" href="logout">Logout</a></div>
+        
+      </div>
+    </div>
+    {% comment %} <div class="card-header bg-primary text-white"><b>Welcome, {{user.username}}</b>   <a style="color: yellow;" href="logout">Logout</a></div> {% endcomment %}
+    {% else %}
+    <div class='row bg-primary'>
+      <div class="card-header bg-primary text-white" style="margin-left:auto; margin-right:40px;"><a style="color: yellow" href="login">Login</a><b> / </b><a style="color: yellow;" href="register">Register</a></div>
+    </div>
+    {% endif %}
     <div class="card-body messages-box">
       
       <ul class="list-unstyled messages-list">
@@ -78,7 +96,7 @@
               <b>AI Chatbot</b>
             </div>
             <div class="message-content">
-              Hi, I am your AI Chatbot, how can I help you?
+              Hi, {{user.username}}, I am your AI Chatbot, how can I help you?
             </div>
           </div>
         </li>
